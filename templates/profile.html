@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>My Profile</h1>
+
+    {% if student.photo %}
+        <img src="{{ url_for('static', filename='photos/' + student.photo) }}"
+             alt="Student Photo"
+             width="120">
+    {% endif %}
+
+    <h3>Personal Information</h3>
+
+    <p><b>Registration Number:</b> {{ student.registration_number or 'Not Available' }}</p>
+    <p><b>First Name:</b> {{ student.first_name }}</p>
+    <p><b>Last Name:</b> {{ student.last_name }}</p>
+    <p><b>Email:</b> {{ student.email }}</p>
+    <p><b>Phone:</b> {{ student.phone or 'Not Available' }}</p>
+    <p><b>Date of Birth:</b> {{ student.date_of_birth or 'Not Available' }}</p>
+    <p><b>Address:</b> {{ student.address or 'Not Available' }}</p>
+    <p><b>Location:</b> {{ student.location or 'Not Available' }}</p>
+
+    <h3>Educational Information</h3>
+
+    <p><b>Qualification:</b> {{ student.qualification or 'Not Available' }}</p>
+
+    <p><b>10th:</b>
+        {{ student.tenth_percentage or 'Not Available' }}%
+        ({{ student.tenth_year or 'Not Available' }})
+    </p>
+
+    <p><b>12th:</b>
+        {{ student.twelfth_percentage or 'Not Available' }}%
+        ({{ student.twelfth_year or 'Not Available' }})
+    </p>
+
+    <p><b>Graduation University:</b> {{ student.graduation_university or 'Not Available' }}</p>
+    <p><b>Graduation Percentage:</b> {{ student.graduation_percentage or 'Not Available' }}%</p>
+    <p><b>Graduation Year:</b> {{ student.graduation_year or 'Not Available' }}</p>
+
+    <p><b>Post Graduation University:</b> {{ student.postgrad_university or 'Not Available' }}</p>
+    <p><b>Post Graduation Percentage:</b> {{ student.postgrad_percentage or 'Not Available' }}</p>
+    <p><b>Post Graduation Year:</b> {{ student.postgrad_year or 'Not Available' }}</p>
+
+    <h3>Professional Information</h3>
+
+    <p><b>Experience:</b> {{ student.experience or 'Not Available' }}</p>
+    <p><b>Domain:</b> {{ student.domain or 'Not Available' }}</p>
+    <p><b>Skills:</b> {{ student.skills or 'Not Available' }}</p>
+    <p><b>Technical Skills:</b> {{ student.technical_skills or 'Not Available' }}</p>
+    <p><b>Soft Skills:</b> {{ student.soft_skills or 'Not Available' }}</p>
+    <p><b>Certifications:</b> {{ student.certifications or 'Not Available' }}</p>
+    <p><b>Projects:</b> {{ student.projects or 'Not Available' }}</p>
+
+    <h3>Personal Interests</h3>
+
+    <p><b>Hobbies:</b> {{ student.hobbies or 'Not Available' }}</p>
+    <p><b>Interests:</b> {{ student.interests or 'Not Available' }}</p>
+
+    <h3>Job Preferences</h3>
+
+    <p><b>Positions Looking For:</b> {{ student.job_positions_looking_for or 'Not Available' }}</p>
+    <p><b>Preferred Location:</b> {{ student.job_location or 'Not Available' }}</p>
+
+    <h3>Contact & Documents</h3>
+
+    <p><b>LinkedIn:</b>
+        {% if student.linkedin_profile %}
+            <a href="{{ student.linkedin_profile }}" target="_blank">View LinkedIn</a>
+        {% else %}
+            Not Available
+        {% endif %}
+    </p>
+
+    <p><b>GitHub:</b>
+        {% if student.github_profile %}
+            <a href="{{ student.github_profile }}" target="_blank">View GitHub</a>
+        {% else %}
+            Not Available
+        {% endif %}
+    </p>
+
+    <p><b>Portfolio:</b>
+        {% if student.portfolio %}
+            <a href="{{ student.portfolio }}" target="_blank">View Portfolio</a>
+        {% else %}
+            Not Available
+        {% endif %}
+    </p>
+
+    <p><b>Resume:</b>
+        {% if student.resume %}
+            <a href="{{ url_for('static', filename='resumes/' + student.resume) }}"
+               target="_blank">View Resume</a>
+        {% else %}
+            Not Available
+        {% endif %}
+    </p>
+
+    <a href="{{ url_for('dashboard') }}" class="btn">
+        Back to Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>

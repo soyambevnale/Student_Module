@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Header -->
+    <div class="dashboard-header">
+        <div>
+            <h1>Student Dashboard</h1>
+            <p>Welcome, {{ student_name }}!</p>
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="logout-btn">
+            Logout
+        </a>
+    </div>
+
+    <!-- Profile Completion -->
+
+<div class="profile-completion">
+
+    <h2>Profile Completion</h2>
+
+    <div class="pie-chart"
+         style="--percentage: {{ profile_completion }}%;">
+
+        <div class="pie-center">
+            <h2>{{ profile_completion }}%</h2>
+        </div>
+
+    </div>
+
+    <p>Complete your profile to improve your chances
+       of getting placed.</p>
+
+</div>
+    <!-- Dashboard Cards -->
+    <div class="dashboard-cards">
+
+        <!-- My Profile -->
+        <div class="dashboard-card">
+            <h2>My Profile</h2>
+            <p>View and manage your personal information.</p>
+
+            <a href="{{ url_for('profile') }}" class="btn">
+                View Profile
+            </a>
+        </div>
+
+        <!-- Available Jobs -->
+        <div class="dashboard-card">
+            <h2>Available Jobs</h2>
+            <p>Explore available job opportunities.</p>
+
+            <a href="{{ url_for('jobs') }}" class="btn">
+                View Available Jobs
+            </a>
+        </div>
+        
+        <!-- Applied Jobs -->
+        <div class="dashboard-card">
+            <h2>Applied Jobs</h2>
+            <p>View jobs you have applied for.</p>
+            <a href="{{ url_for('applied_jobs') }}" class="btn">
+            View Applied Jobs
+            </a>
+        </div>
+
+        <!-- Application Status -->
+        <div class="dashboard-card">
+            <h2>Application Status</h2>
+            <p>Track your application progress.</p>
+            <a href="{{ url_for('interview_status') }}" class="btn">
+            View Interview Status
+            </a>
+        </div>
+
+        <!-- Opt Out from Placement -->
+        <div class="dashboard-card">
+            <h2>Placement Preference</h2>
+
+            <p>
+            If you don't want to participate in placement
+            activities, you can opt out here.
+            </p>
+
+            <form method="POST"
+                action="{{ url_for('opt_out_placement') }}">
+
+                <button type="submit" class="btn">
+                    Opt Out from Placement
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

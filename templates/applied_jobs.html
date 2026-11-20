@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Applied Jobs</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #263238;
+            margin-bottom: 25px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .job-card {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .job-card h3 {
+            color: #1565c0;
+            margin-top: 0;
+        }
+
+        .job-card p {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .status {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 12px;
+            border-radius: 5px;
+        }
+
+        .no-jobs {
+            background: white;
+            padding: 25px;
+            margin-top: 20px;
+            text-align: center;
+            border-radius: 10px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="{{ url_for('dashboard') }}" class="back-btn">
+        Back to Dashboard
+    </a>
+
+    <h2>My Applied Jobs</h2>
+
+    {% if applications %}
+
+        {% for application in applications %}
+
+            <div class="job-card">
+
+                <h3>{{ application.company_name }}</h3>
+
+                <p>
+                    <b>Position:</b>
+                    {{ application.position }}
+                </p>
+
+                <p>
+                    <b>Domain:</b>
+                    {{ application.domain or 'Not specified' }}
+                </p>
+
+                <p>
+                    <b>Package:</b>
+                    {{ application.package or 'Not specified' }}
+                </p>
+
+                <p>
+                    <b>Location:</b>
+                    {{ application.location or 'Not specified' }}
+                </p>
+
+                <p>
+                    <b>Application Date:</b>
+                    {{ application.application_date }}
+                </p>
+
+                <p>
+                    <b>Application Status:</b>
+                    <span class="status">
+                        {{ application.status }}
+                    </span>
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="no-jobs">
+            <h3>No Applications Yet!</h3>
+            <p>You have not applied for any jobs.</p>
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

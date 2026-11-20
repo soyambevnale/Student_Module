@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Jobs</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h2 {
+            color: #263238;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .job-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .job-card h3 {
+            color: #1565c0;
+            margin-top: 0;
+        }
+
+        .job-card p {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: #1565c0;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .no-jobs {
+            text-align: center;
+            color: #777;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .apply-btn {
+            display: inline-block;
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .apply-btn:hover {
+            background-color: #0d47a1;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="{{ url_for('dashboard') }}" class="back-btn">
+        Back to Dashboard
+    </a>
+
+    <h2>Available Jobs</h2>
+
+    {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <p style="color: green; font-weight: bold;">
+                    {{ message }}
+                </p>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+    {% if jobs %}
+
+        {% for job in jobs %}
+
+            <div class="job-card">
+
+                <h3>{{ job.company_name }}</h3>
+
+                <p><b>Position:</b> {{ job.position }}</p>
+
+                <p><b>Domain:</b> {{ job.domain or 'Not specified' }}</p>
+
+                <p><b>Qualification:</b> {{ job.qualification or 'Not specified' }}</p>
+
+                <p><b>Package:</b> {{ job.package or 'Not specified' }}</p>
+
+                <p><b>Location:</b> {{ job.location or 'Not specified' }}</p>
+
+                <p><b>Contract Type:</b> {{ job.contract_type or 'Not specified' }}</p>
+
+                <p><b>Required Skills:</b> {{ job.skills or 'Not specified' }}</p>
+
+                <p><b>Experience:</b> {{ job.experience or 'Not specified' }}</p>
+
+                <p><b>Status:</b> {{ job.job_status }}</p>
+
+                <a href="{{ url_for('apply_job', job_id=job.job_id) }}"
+                        class="apply-btn">
+                Apply Now
+                </a>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="no-jobs">
+            <h3>No Jobs Available</h3>
+            <p>Currently, there are no open job opportunities.</p>
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Student Registration</h1>
+
+    <form action="/register" method="POST"
+          enctype="multipart/form-data">
+
+        <!-- Personal Information -->
+
+        <h3>Personal Information</h3>
+
+        <label>First Name</label>
+        <input type="text" name="first_name"
+            value="{{ form_data.get('first_name', '') }}"
+            class="{% if errors.get('first_name') %}invalid{% endif %}"
+            pattern="[A-Za-z]+" required>
+        {% if errors.get('first_name') %}
+            <small class="error">{{ errors.get('first_name') }}</small>
+        {% endif %}
+
+        <label>Last Name</label>
+        <input type="text" name="last_name"
+            value="{{ form_data.get('last_name', '') }}"
+            class="{% if errors.get('last_name') %}invalid{% endif %}"
+            pattern="[A-Za-z]+" required>
+        {% if errors.get('last_name') %}
+            <small class="error">{{ errors.get('last_name') }}</small>
+        {% endif %}
+
+        <label>Full Address</label>
+        <textarea name="address"
+            class="{% if errors.get('address') %}invalid{% endif %}"
+            placeholder="Enter Complete Address"
+            required>{{ form_data.get('address', '') }}</textarea>
+        {% if errors.get('address') %}
+            <small class="error">{{ errors.get('address') }}</small>
+        {% endif %}
+
+        <label>Date of Birth</label>
+        <input type="date" name="date_of_birth"
+            value="{{ form_data.get('date_of_birth', '') }}"
+            class="{% if errors.get('date_of_birth') %}invalid{% endif %}"
+            required>
+        {% if errors.get('date_of_birth') %}
+            <small class="error">{{ errors.get('date_of_birth') }}</small>
+        {% endif %}
+
+        <label>Location</label>
+        <input type="text" name="location"
+            value="{{ form_data.get('location', '') }}"
+            class="{% if errors.get('location') %}invalid{% endif %}"
+            required>
+        {% if errors.get('location') %}
+            <small class="error">{{ errors.get('location') }}</small>
+        {% endif %}
+
+
+        <!-- Educational Information -->
+
+        <h3>Educational Information</h3>
+
+        <h4>10th Details</h4>
+
+        <label>10th Percentage (%)</label>
+        <input type="number" name="tenth_percentage"
+            value="{{ form_data.get('tenth_percentage', '') }}"
+            class="{% if errors.get('tenth_percentage') %}invalid{% endif %}"
+            min="0" max="100" step="0.01" required>
+        {% if errors.get('tenth_percentage') %}
+            <small class="error">{{ errors.get('tenth_percentage') }}</small>
+        {% endif %}
+
+        <label>10th Passing Year</label>
+        <input type="number" name="tenth_year"
+            value="{{ form_data.get('tenth_year', '') }}"
+            class="{% if errors.get('tenth_year') %}invalid{% endif %}"
+            min="1990" max="2026" required>
+        {% if errors.get('tenth_year') %}
+            <small class="error">{{ errors.get('tenth_year') }}</small>
+        {% endif %}
+
+
+        <h4>12th Details</h4>
+
+        <label>12th Percentage (%)</label>
+        <input type="number" name="twelfth_percentage"
+            value="{{ form_data.get('twelfth_percentage', '') }}"
+            class="{% if errors.get('twelfth_percentage') %}invalid{% endif %}"
+            min="0" max="100" step="0.01" required>
+        {% if errors.get('twelfth_percentage') %}
+            <small class="error">{{ errors.get('twelfth_percentage') }}</small>
+        {% endif %}
+
+        <label>12th Passing Year</label>
+        <input type="number" name="twelfth_year"
+            value="{{ form_data.get('twelfth_year', '') }}"
+            class="{% if errors.get('twelfth_year') %}invalid{% endif %}"
+            min="1990" max="2026" required>
+        {% if errors.get('twelfth_year') %}
+            <small class="error">{{ errors.get('twelfth_year') }}</small>
+        {% endif %}
+
+
+        <h4>Highest Qualification</h4>
+
+        <label>Qualification</label>
+        <select name="qualification"
+            class="{% if errors.get('qualification') %}invalid{% endif %}"
+            required>
+
+            <option value="">Select Qualification</option>
+
+            {% for q in ['BCA', 'BCS', 'BSc Computer Science',
+                'BSc Software Engineering', 'BE', 'BTech',
+                'MCA', 'MSc', 'Other'] %}
+
+                <option value="{{ q }}"
+                    {% if form_data.get('qualification') == q %}selected{% endif %}>
+                    {{ q }}
+                </option>
+
+            {% endfor %}
+        </select>
+
+        {% if errors.get('qualification') %}
+            <small class="error">{{ errors.get('qualification') }}</small>
+        {% endif %}
+
+
+        <h4>Graduation Details</h4>
+
+        <label>Graduation University</label>
+        <input type="text" name="graduation_university"
+            value="{{ form_data.get('graduation_university', '') }}"
+            class="{% if errors.get('graduation_university') %}invalid{% endif %}"
+            maxlength="50" required>
+        {% if errors.get('graduation_university') %}
+            <small class="error">{{ errors.get('graduation_university') }}</small>
+        {% endif %}
+
+        <label>Graduation Percentage (%)</label>
+        <input type="number" name="graduation_percentage"
+            value="{{ form_data.get('graduation_percentage', '') }}"
+            class="{% if errors.get('graduation_percentage') %}invalid{% endif %}"
+            min="0" max="100" step="0.01" required>
+        {% if errors.get('graduation_percentage') %}
+            <small class="error">{{ errors.get('graduation_percentage') }}</small>
+        {% endif %}
+
+        <label>Graduation Passing Year</label>
+        <input type="number" name="graduation_year"
+            value="{{ form_data.get('graduation_year', '') }}"
+            class="{% if errors.get('graduation_year') %}invalid{% endif %}"
+            min="1990" max="2026" required>
+        {% if errors.get('graduation_year') %}
+            <small class="error">{{ errors.get('graduation_year') }}</small>
+        {% endif %}
+
+
+        <h4>Post Graduation Details (Optional)</h4>
+
+        <label>Post Graduation University</label>
+        <input type="text" name="postgrad_university"
+            value="{{ form_data.get('postgrad_university', '') }}"
+            class="{% if errors.get('postgrad_university') %}invalid{% endif %}"
+            maxlength="50">
+        {% if errors.get('postgrad_university') %}
+            <small class="error">{{ errors.get('postgrad_university') }}</small>
+        {% endif %}
+
+        <label>Post Graduation Percentage (%)</label>
+        <input type="number" name="postgrad_percentage"
+            value="{{ form_data.get('postgrad_percentage', '') }}"
+            class="{% if errors.get('postgrad_percentage') %}invalid{% endif %}"
+            min="0" max="100" step="0.01">
+        {% if errors.get('postgrad_percentage') %}
+            <small class="error">{{ errors.get('postgrad_percentage') }}</small>
+        {% endif %}
+
+        <label>Post Graduation Passing Year</label>
+        <input type="number" name="postgrad_year"
+            value="{{ form_data.get('postgrad_year', '') }}"
+            class="{% if errors.get('postgrad_year') %}invalid{% endif %}"
+            min="1990" max="2026">
+        {% if errors.get('postgrad_year') %}
+            <small class="error">{{ errors.get('postgrad_year') }}</small>
+        {% endif %}
+
+
+        <!-- Professional Information -->
+
+        <h3>Professional Information</h3>
+
+        <label>Experience</label>
+        <select name="experience"
+            class="{% if errors.get('experience') %}invalid{% endif %}"
+            required>
+
+            <option value="">Select Experience</option>
+
+            {% for exp in ['Fresher', '0-1 Year', '1-2 Years', '2+ Years'] %}
+                <option value="{{ exp }}"
+                    {% if form_data.get('experience') == exp %}selected{% endif %}>
+                    {{ exp }}
+                </option>
+            {% endfor %}
+
+        </select>
+
+        {% if errors.get('experience') %}
+            <small class="error">{{ errors.get('experience') }}</small>
+        {% endif %}
+
+
+        <label>Domain</label>
+        <input type="text" name="domain"
+            value="{{ form_data.get('domain', '') }}"
+            class="{% if errors.get('domain') %}invalid{% endif %}"
+            placeholder="Data Analytics, Web Development">
+        {% if errors.get('domain') %}
+            <small class="error">{{ errors.get('domain') }}</small>
+        {% endif %}
+
+
+        <label>Skills</label>
+        <textarea name="skills"
+            class="{% if errors.get('skills') %}invalid{% endif %}"
+            required>{{ form_data.get('skills', '') }}</textarea>
+        {% if errors.get('skills') %}
+            <small class="error">{{ errors.get('skills') }}</small>
+        {% endif %}
+
+
+        <label>Technical Skills</label>
+        <textarea name="technical_skills">{{ form_data.get('technical_skills', '') }}</textarea>
+
+        <label>Soft Skills</label>
+        <textarea name="soft_skills">{{ form_data.get('soft_skills', '') }}</textarea>
+
+        <label>Certifications</label>
+        <textarea name="certifications">{{ form_data.get('certifications', '') }}</textarea>
+
+        <label>Projects</label>
+        <textarea name="projects">{{ form_data.get('projects', '') }}</textarea>
+
+
+        <!-- Personal Interests -->
+
+        <h3>Personal Interests</h3>
+
+        <label>Hobbies</label>
+        <textarea name="hobbies">{{ form_data.get('hobbies', '') }}</textarea>
+
+        <label>Interests</label>
+        <textarea name="interests">{{ form_data.get('interests', '') }}</textarea>
+
+
+        <!-- Job Preferences -->
+
+        <h3>Job Preferences</h3>
+
+        <label>Job Positions Looking For</label>
+        <textarea name="job_positions_looking_for"
+            class="{% if errors.get('job_positions_looking_for') %}invalid{% endif %}"
+            required>{{ form_data.get('job_positions_looking_for', '') }}</textarea>
+
+        {% if errors.get('job_positions_looking_for') %}
+            <small class="error">{{ errors.get('job_positions_looking_for') }}</small>
+        {% endif %}
+
+
+        <label>Preferred Job Location</label>
+        <input type="text" name="job_location"
+            value="{{ form_data.get('job_location', '') }}"
+            class="{% if errors.get('job_location') %}invalid{% endif %}"
+            required>
+
+        {% if errors.get('job_location') %}
+            <small class="error">{{ errors.get('job_location') }}</small>
+        {% endif %}
+
+
+        <!-- Contact Information -->
+
+        <h3>Contact Information</h3>
+
+        <label>Email</label>
+        <input type="email" name="email"
+            value="{{ form_data.get('email', '') }}"
+            class="{% if errors.get('email') %}invalid{% endif %}"
+            required>
+        {% if errors.get('email') %}
+            <small class="error">{{ errors.get('email') }}</small>
+        {% endif %}
+
+
+        <label>Contact Number</label>
+        <input type="tel" name="phone"
+            value="{{ form_data.get('phone', '') }}"
+            class="{% if errors.get('phone') %}invalid{% endif %}"
+            pattern="[0-9]{10}" maxlength="10" required>
+
+        {% if errors.get('phone') %}
+            <small class="error">{{ errors.get('phone') }}</small>
+        {% endif %}
+
+
+        <label>LinkedIn Profile</label>
+        <input type="url" name="linkedin_profile"
+            value="{{ form_data.get('linkedin_profile', '') }}">
+
+        <label>GitHub Profile</label>
+        <input type="url" name="github_profile"
+            value="{{ form_data.get('github_profile', '') }}">
+
+        <label>Portfolio</label>
+        <input type="url" name="portfolio"
+            value="{{ form_data.get('portfolio', '') }}">
+
+
+        <!-- Upload Documents -->
+
+        <h3>Upload Documents</h3>
+
+        <label>Profile Photo</label>
+        <input type="file" name="photo"
+            accept=".jpg,.jpeg,.png"
+            class="{% if errors.get('photo') %}invalid{% endif %}">
+
+        {% if errors.get('photo') %}
+            <small class="error">{{ errors.get('photo') }}</small>
+        {% endif %}
+
+
+        <label>Resume (PDF)</label>
+        <input type="file" name="resume"
+            accept=".pdf" required
+            class="{% if errors.get('resume') %}invalid{% endif %}">
+
+        {% if errors.get('resume') %}
+            <small class="error">{{ errors.get('resume') }}</small>
+        {% endif %}
+
+
+        <!-- Account Information -->
+
+        <h3>Account Information</h3>
+
+        <label>Password</label>
+        <input type="password" name="password"
+            class="{% if errors.get('password') %}invalid{% endif %}"
+            minlength="8" required>
+
+        {% if errors.get('password') %}
+            <small class="error">{{ errors.get('password') }}</small>
+        {% endif %}
+
+
+        <label>Confirm Password</label>
+        <input type="password" name="confirm_password"
+            class="{% if errors.get('confirm_password') %}invalid{% endif %}"
+            minlength="8" required>
+
+        {% if errors.get('confirm_password') %}
+            <small class="error">{{ errors.get('confirm_password') }}</small>
+        {% endif %}
+
+
+        <button type="submit">Register</button>
+
+    </form>
+
+    <p>Already registered? <a href="/login">Login Here</a></p>
+
+</div>
+
+</body>
+</html>

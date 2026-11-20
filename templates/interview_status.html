@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interview Status</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>My Interview Status</h1>
+
+        <a href="{{ url_for('dashboard') }}" class="btn">
+            Back to Dashboard
+        </a>
+
+        {% if interviews %}
+
+            {% for interview in interviews %}
+
+                <div class="dashboard-card">
+
+                    <h2>{{ interview.company_name }}</h2>
+
+                    <p><strong>Position:</strong>
+                        {{ interview.position }}</p>
+
+                    <p><strong>Interview Date:</strong>
+                        {{ interview.interview_date or 'Not Scheduled' }}</p>
+
+                    <p><strong>Interview Time:</strong>
+                        {{ interview.interview_time or 'Not Scheduled' }}</p>
+
+                    <p><strong>Location:</strong>
+                        {{ interview.location or 'Not Available' }}</p>
+
+                    <p><strong>Status:</strong>
+                        {{ interview.status }}</p>
+
+                    <p><strong>Result:</strong>
+                        {{ interview.result }}</p>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="dashboard-card">
+                <h2>No Interview Scheduled</h2>
+                <p>Your interview details will appear here
+                   when they are scheduled.</p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
